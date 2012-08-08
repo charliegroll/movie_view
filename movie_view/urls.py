@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-import views.*
+import movie_view.views.*
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -7,6 +7,7 @@ import views.*
 
 urlpatterns = patterns('',
         ('^home/', views.home),
+        ('^movie/.*/', views.movie),
     # Examples:
     # url(r'^$', 'movie_view.views.home', name='home'),
     # url(r'^movie_view/', include('movie_view.foo.urls')),

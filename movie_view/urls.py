@@ -6,8 +6,8 @@ from movie_view.views import home, movie
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-        ('^home/$', home.greet),
-        ('^movie/(.*)/', movie.show),
+        ('^/$', home.greet),
+        ('^movie/(.*)/$', movie.show),
     # Examples:
     # url(r'^$', 'movie_view.views.home', name='home'),
     # url(r'^movie_view/', include('movie_view.foo.urls')),

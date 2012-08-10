@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404
 from django.template.loader import get_template
 from django.template import Context
 import string
+from django import template
 
 def show(request, name):
     name = parse_movie(name)
@@ -58,4 +59,8 @@ def process_movies(name):
     except:
         return None
 
+register = template.Library()
 
+@register.filter
+def getimage(movie, s):
+    return movie.poster.geturl(size=s)

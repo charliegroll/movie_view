@@ -7,7 +7,7 @@
 {% for movie in movies %}
 	<div class="movie-item">
 		<p>{{ movie.title }} ({{ movie.releasedate.year }})</p>
-		<img src="{{ movie.poster.geturl }}" style="width: 100px;" />
+		<img src="{{ movie|getimage:'small' }}" style="width: 100px;" />
 
 	</div>
 {% endfor %}

@@ -7,7 +7,7 @@ import string
 def show(request, name):
     name = parse_movie(name)
 
-    ua = request.META.get('HTTP_USER_AGENT', 'unknown')
+    #ua = request.META.get('HTTP_USER_AGENT', 'unknown')
 
     if name == '':
         raise Http404()
@@ -26,10 +26,20 @@ def show(request, name):
                 #names = ''
                 #for x in movies:
                 #    names = names + x.title + '  '
-                names = movies[0].title + ' (' + str(movies[0].releasedate.year) + ')'
-                html = t.render(Context({'movie':name, 'id': names}))
+                movie = movies[0]
+                html = t.render(Context({'movie': name, 'id': movie}))
 
         return HttpResponse(html)
+
+def showall(request):
+    t = get_template('home.html')
+
+    # get movie list
+    movies = process_movies('Batman')
+    html = t.render(Context({'movies': movies}))
+
+    return HttpResponse(html)
+
 
 def parse_movie(name):
     name = name.split('-')
@@ -44,8 +54,6 @@ def process_movies(name):
 
     try:
         movies = searchMovie(name)
-        if None == movies:
-            return None
         return movies
     except:
         return None

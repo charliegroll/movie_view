@@ -26,7 +26,7 @@ def show(request, name):
                 #names = ''
                 #for x in movies:
                 #    names = names + x.title + '  '
-                names = movies[0].title
+                names = movies[0].title + ' (' + str(movies[0].releasedate.year) + ')'
                 html = t.render(Context({'movie':name, 'id': names}))
 
         return HttpResponse(html)

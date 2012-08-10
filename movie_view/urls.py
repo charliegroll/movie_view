@@ -1,12 +1,12 @@
 from django.conf.urls import patterns, include, url
-from movie_view.views import home, movie
+from movie_view.views import movie
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-        ('^/$', home.greet),
+       # ('^/$', ),
         ('^movie/(.*)/$', movie.show),
     # Examples:
     # url(r'^$', 'movie_view.views.home', name='home'),

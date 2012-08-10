@@ -1,14 +1,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
-<head>
-    <title>{% block title %}{% endblock %}</title>
-</head>
-<body>
-    <h1>My Movie View Site</h1>
-    {% block content %}{% endblock %}
-    {% block footer %}
-    <hr>
-    <p>Thanks for visiting my site.</p>
-    {% endblock %}
-</body>
+	<head>
+		{% load static %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{% block title %}{% endblock %}</title>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet/less" type="text/css" href="../assets/styles.less">
+		<script src="{% get_static_prefix %}external/js/less.min.js" type="text/javascript"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<h1>My Movie View Site</h1>
+		{% block content %}{% endblock %}
+		{% block footer %}
+		<hr>
+		<p>Thanks for visiting my site.</p>
+		{% endblock %}
+	</body>
 </html>

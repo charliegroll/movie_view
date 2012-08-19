@@ -37,10 +37,10 @@ def showall(request):
 
     # get movie list
     movies = process_movies('Batman')
-    html = t.render(Context({'movies': movies}))
+    posters = process_posters(movies)
+    html = t.render(Context({'movies': movies, 'posters': posters}))
 
     return HttpResponse(html)
-
 
 def parse_movie(name):
     name = name.split('-')
@@ -59,8 +59,9 @@ def process_movies(name):
     except:
         return None
 
-register = template.Library()
+def process_posters(movies):
+    posters = list(len(movies))
 
-@register.filter
-def getimage(movie, s):
-    return movie.poster.geturl(size=s)
+    for m in movies:
+        posters.append(m.poster.geturl(size='w154')
+    return posters

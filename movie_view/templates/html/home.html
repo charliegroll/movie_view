@@ -4,10 +4,10 @@
 
 {% block content %}
 
-{% for movie, poster in map(None, movies, posters) %}
+{% for m in movies %}
 	<div class="movie-item">
-		<p>{{ movie.title }} ({{ movie.releasedate.year }})</p>
-		<img src="{{ poster }}" style="width: 100px;" />
+		<p>{{ m.movie.title }} ({{ m.movie.releasedate.year }})</p>
+		<img src="{{ m.poster }}" style="width: 100px;" />
 
 	</div>
 {% endfor %}

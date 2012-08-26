@@ -5,6 +5,13 @@ from django.template import Context
 import string
 from django import template
 
+moviesToDisplay = list()
+
+class DisplayMovie:
+    def __init__(self, movie, poster):
+        self.movie = movie
+        self.poster = poster
+
 def show(request, name):
     name = parse_movie(name)
 
@@ -14,14 +21,14 @@ def show(request, name):
         raise Http404()
     else:
         t = get_template('movie.html')
-        movies = process_movies(name)
+        process_movies(name)
 
-        if None == movies:
-            html = t.render(Context({'movie': name, 'id': '<null>'}))
+        if None == moviesToDisplay:
+            html = t.render(Context({'movie': name,}))
         else:
-            l = len(movies)
+            l = len(moviesToDisplay)
             if l == 1:
-                html = t.render(Context({'movie': name, 'id': movies[0].title}))
+                html = t.render(Context({'movie': name, 'id': mo}))
             else:
                 #handle multiple responses
                 #names = ''
@@ -37,8 +44,7 @@ def showall(request):
 
     # get movie list
     movies = process_movies('Batman')
-    posters = process_posters(movies)
-    html = t.render(Context({'movies': movies, 'posters': posters}))
+    html = t.render(Context({'movies': moviesToDisplay,}))
 
     return HttpResponse(html)
 
@@ -53,15 +59,8 @@ def process_movies(name):
     set_key('36fb5f623484f4b2680f492005762f31') #store this key somewhere
     set_locale()
 
-    try:
-        movies = searchMovie(name)
-        return movies
-    except:
-        return None
-
-def process_posters(movies):
-    posters = list(len(movies))
+    movies = searchMovie(name)
 
     for m in movies:
-        posters.append(m.poster.geturl(size='w154')
-    return posters
+        d = DisplayMovie(m, '')#m.poster.geturl(size='w154'))
+        moviesToDisplay.append(d)

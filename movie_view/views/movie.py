@@ -1,9 +1,9 @@
-from tmdb3 import set_key, set_locale, searchMovie
+from tmdb3 import set_key, set_locale, searchMovie, Movie
 from django.http import HttpResponse, Http404
-from django.template.loader import get_template
-from django.template import Context
-import string
 from django import template
+from django.template import Context
+from django.template.loader import get_template
+import string
 
 moviesToDisplay = list()
 
@@ -62,5 +62,5 @@ def process_movies(name):
     movies = searchMovie(name)
 
     for m in movies:
-        d = DisplayMovie(m, '')#m.poster.geturl(size='w154'))
+        d = DisplayMovie(m, m.poster.geturl('w154'))
         moviesToDisplay.append(d)

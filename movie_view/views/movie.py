@@ -62,5 +62,13 @@ def process_movies(name):
     movies = searchMovie(name)
 
     for m in movies:
-        d = DisplayMovie(m, m.poster.geturl('w154'))
+        p = m.poster
+
+    #    if p == '':
+        d = DisplayMovie(m, 'http://placekitten.com/154/231')
+    #    else:
+    #        d = DisplayMovie(m, m.poster.geturl('w154'))
+
         moviesToDisplay.append(d)
+
+    moviesToDisplay.sort(key=lambda x: x.movie.releasedate.year, reverse=True)

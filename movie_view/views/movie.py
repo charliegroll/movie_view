@@ -4,13 +4,17 @@ from django import template
 from django.template import Context
 from django.template.loader import get_template
 import string
+import bisect
 
 moviesToDisplay = list()
+movieids = list()
 
 class DisplayMovie:
-    def __init__(self, movie, poster):
+    def __init__(self, movie, poster, urlname):
         self.movie = movie
         self.poster = poster
+        self.year = (movie.releasedate.year if movie.releasedate else 0)
+        self.urlname = urlname
 
 def show(request, name):
     name = parse_movie(name)
@@ -55,6 +59,24 @@ def parse_movie(name):
     else:
         return " ".join(name).title()
 
+def unparse_movie(movie):
+    if not movie.title:
+        return ''
+
+    result = ''
+    last = False
+    for x in movie.title:
+        if x.isalnum():
+            result += x
+            last = False
+        elif not last:
+            result += '-'
+            last = True
+
+    if movie.releasedate:
+        result += '-' + str(movie.releasedate.year)
+    return result.rstrip('-')
+
 def process_movies(name):
     set_key('36fb5f623484f4b2680f492005762f31') #store this key somewhere
     set_locale()
@@ -62,13 +84,16 @@ def process_movies(name):
     movies = searchMovie(name)
 
     for m in movies:
+        if m.id in movieids:
+            continue
+
         p = m.poster
 
-        if  p:
-            d = DisplayMovie(m,  m.poster.geturl('w154'))
+        if p:
+            d = DisplayMovie(m,  m.poster.geturl('w154'), unparse_movie(m))
         else:
-            d = DisplayMovie(m, '')
+            d = DisplayMovie(m, '', unparse_movie(m))
 
+        pos = bisect.bisect(movieids, m.id)
+        movieids.insert(pos, m.id)
         moviesToDisplay.append(d)
-
-    moviesToDisplay.sort(key=lambda x: (x.movie.releasedate.year if x.movie.releasedate else 0), reverse=True)

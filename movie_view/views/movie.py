@@ -5,6 +5,7 @@ from django.template import Context
 from django.template.loader import get_template
 import string
 import bisect
+import filesystem
 
 moviesToDisplay = list()
 movieids = list()
@@ -18,8 +19,6 @@ class DisplayMovie:
 
 def show(request, name):
     name = parse_movie(name)
-
-    #ua = request.META.get('HTTP_USER_AGENT', 'unknown')
 
     if name == '':
         raise Http404()

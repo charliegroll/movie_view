@@ -46,7 +46,7 @@ def showall(request):
     t = get_template('home.html')
 
     # get movie list
-    movies = process_movies('Batman')
+    movies = process_movies('~/Downloads/Movies')
     html = t.render(Context({'movies': moviesToDisplay,}))
 
     return HttpResponse(html)
@@ -76,11 +76,16 @@ def unparse_movie(movie):
         result += '-' + str(movie.releasedate.year)
     return result.rstrip('-')
 
-def process_movies(name):
+def process_movies(dir):
     set_key('36fb5f623484f4b2680f492005762f31') #store this key somewhere
     set_locale()
 
-    movies = searchMovie(name)
+    movies = list()
+    files = filesystem.explore(dir)
+
+    for f in files:
+        movie = searchMovie(f.fulltitle)
+        movies.insert(0,movie)
 
     for m in movies:
         if m.id in movieids:

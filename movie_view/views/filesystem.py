@@ -1,22 +1,14 @@
 import os
 import string
 
-class MovieFile():
-    def __init__(self, title, year=0, dir, filename):
-        self.title = title
-        self.year = year
-        self.dir = dir
-        self.filename = filename
-    def __str__(self):
-        return repr(self.title + ' (' + self.year + ')'
-
 dirlist = list()
 filelist = {}
 exts = ['.avi', '.mkv', '.m4v', '.mp4']
 
+# returns a list of MovieFiles
 def explore(dir):
     if dir not in dirlist:
-        dirlist.append(os.abspath(dir))
+        dirlist.append(os.path.abspath(dir))
 
     for root, dirs, files in os.walk(dir):
         # we ignore all hidden files and dirs
@@ -31,7 +23,7 @@ def explore(dir):
             y = f[f.rfind("(")+1:f.rfind(")")] # have to check if there's no year
             t = f[0:f.rfind("(")]
             d = root
-            m = MovieFile(t, y, d, f)
+            m = MovieFile(title=t, year=y, dir=d, filename=f)
             filelist.setdefault(str(m), []).append(m)
 
         print root,
@@ -57,3 +49,14 @@ def add_extension(ext):
         return True
     else:
         return False
+
+# store all of the metadata about the files
+class MovieFile():
+    def __init__(self, title, dir, filename, year=0):
+        self.title = title
+        self.year = year
+        self.fulltitle = title if year == 0 else title + ' (' + year + ')'
+        self.dir = dir
+        self.filename = filename
+    def __str__(self):
+        return repr(self.title + ' (' + self.year + ')')

@@ -5,7 +5,7 @@ from django.template import Context
 from django.template.loader import get_template
 import string
 import bisect
-import filesystem
+from filesystem import explore, filelist
 
 moviesToDisplay = list()
 movieids = list()
@@ -81,9 +81,9 @@ def process_movies(dir):
     set_locale()
 
     movies = list()
-    files = filesystem.explore(dir)
+    explore(dir)
 
-    for f in files:
+    for f in filelist:
         movie = searchMovie(f.fulltitle)
         movies.insert(0,movie)
 

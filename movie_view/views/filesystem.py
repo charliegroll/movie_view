@@ -3,36 +3,49 @@ import string
 
 dirlist = list()
 filelist = {}
-exts = ['.avi', '.mkv', '.m4v', '.mp4']
+exts = ['.avi', '.mkv', '.m4v', '.mp4'] # todo: make this a set()
 
 # returns a list of MovieFiles
 def explore(dir):
+    dir = os.path.expanduser(dir)
+
+    try:
+        os.chdir(dir)
+    except:
+        raise FileNameException('Invalid dir ' + dir)
+
     if dir not in dirlist:
-        dirlist.append(os.path.abspath(dir))
+        dirlist.append(dir)
 
     for root, dirs, files in os.walk(dir):
         # we ignore all hidden files and dirs
-        dirs[:] = [d for d in dirs if not d.startswith('.')]
-        files[:] = [f for f in files if not f.startswith('.')]
+        dirs = [d for d in dirs if not d.startswith('.')]
+        files = [f for f in files if not f.startswith('.')]
 
         # we only want video files
-        for ext in exts:
-            files[:] = [f for f in files if not f.endswith(ext)]
+        # TODO: keep list of invalid files (if the year isn't a number, maybe at least 1900)
+        for f in list(files):
+            ext = f[f.rfind("."):]
 
-        for f in files:
-            y = f[f.rfind("(")+1:f.rfind(")")] # have to check if there's no year
-            t = f[0:f.rfind("(")]
+            if ext not in exts:
+                files.remove(f)
+
+            froot = f[:f.rfind(".")]
+            y = froot[froot.rfind("(")+1:froot.rfind(")")] # have to check if there's no year
+            t = froot[:froot.rfind("(")].strip().replace("_", ":") # some filesystems replace ':' with '_'
+            f = f.replace("_", ":")
             d = root
+
             m = MovieFile(title=t, year=y, dir=d, filename=f)
             filelist.setdefault(str(m), []).append(m)
 
-        print root,
-        print dirs,
-        print files
+        #print root,
+        #print dirs,
+        #print files
 
 # when trying to add an extension with add_extension,
 # they may submit an invalid format
-class ExtensionException(Exception):
+class FileNameException(Exception):
     def __init__(self, value):
         self.value = value
     def __str__(self):
@@ -42,7 +55,7 @@ class ExtensionException(Exception):
 # valid formats include strings with one leading- or no '.'
 def add_extension(ext):
     if string.rfind(ext, '.') > 0:
-        raise ExtensionException(ext)
+        raise FileNameException(ext)
 
     if ext not in exts and '.' + ext not in exts:
         exts.append('.' + ext if not ext.startswith('.') else ext)
@@ -59,4 +72,4 @@ class MovieFile():
         self.dir = dir
         self.filename = filename
     def __str__(self):
-        return repr(self.title + ' (' + self.year + ')')
+        return repr(self.title + ' (' + self.year + ') at ' + self.dir)

@@ -5,7 +5,7 @@ from django.template import Context
 from django.template.loader import get_template
 import string
 import bisect
-from filesystem import explore, filelist
+from filesystem import explore, fileset, MovieFile
 
 moviesToDisplay = list()
 movieids = list()
@@ -83,12 +83,16 @@ def process_movies(dir):
     movies = list()
     explore(dir)
 
-    for f in filelist:
-        movie = searchMovie(f.fulltitle)
+    for f in fileset:
+        print f.fulltitle
+        result = searchMovie(f.fulltitle)
+        if len(result) == 0:
+            print result
+        movie = result[0] if len(result) > 0 else None
         movies.insert(0,movie)
 
     for m in movies:
-        if m.id in movieids:
+        if not m or m.id in movieids:
             continue
 
         p = m.poster

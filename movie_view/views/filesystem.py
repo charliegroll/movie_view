@@ -2,7 +2,7 @@ import os
 import string
 
 dirlist = list()
-filelist = {}
+fileset = set()
 exts = ['.avi', '.mkv', '.m4v', '.mp4'] # todo: make this a set()
 
 # returns a list of MovieFiles
@@ -37,7 +37,7 @@ def explore(dir):
             d = root
 
             m = MovieFile(title=t, year=y, dir=d, filename=f)
-            filelist.setdefault(str(m), []).append(m)
+            fileset.add(m)
 
         #print root,
         #print dirs,

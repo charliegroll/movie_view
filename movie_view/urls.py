@@ -7,7 +7,6 @@ from movie_view.views import movie
 
 urlpatterns = patterns('',
         (r'^movies/$', movie.showall),
-        (r'^movie/(.*)/$', movie.show),
         (r'^$', movie.showall),
     # Examples:
     # url(r'^$', 'movie_view.views.home', name='home'),

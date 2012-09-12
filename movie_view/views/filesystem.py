@@ -43,14 +43,6 @@ def explore(dir):
         #print dirs,
         #print files
 
-# when trying to add an extension with add_extension,
-# they may submit an invalid format
-class FileNameException(Exception):
-    def __init__(self, value):
-        self.value = value
-    def __str__(self):
-        return repr(self.value)
-
 # add your own file extensions to search
 # valid formats include strings with one leading- or no '.'
 def add_extension(ext):
@@ -62,6 +54,14 @@ def add_extension(ext):
         return True
     else:
         return False
+
+# when trying to add an extension with add_extension,
+# they may submit an invalid format
+class FileNameException(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
 
 # store all of the metadata about the files
 class MovieFile():

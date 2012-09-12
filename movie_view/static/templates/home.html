@@ -4,10 +4,10 @@
 
 {% block content %}
 <section id="movie-grid">
-<div class="row-fluid">
+<div class="movie-row row-fluid">
 {% for m in movies %}
 	<div class="movie-item span2">
-        <img src="{{ m.poster }}" style="width: 100px;" />
+        <img src="{{ m.poster }}" />
         <p>{{ m.movie.title }} 
         {% if m.movie.releasedate.year %}
         ({{ m.movie.releasedate.year }})

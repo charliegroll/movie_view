@@ -1,13 +1,31 @@
+@picture-width: 154; // current width of each poster
+body {
+    //background-image: url('../assets/subtle_dots.png');
+}
+
 .movie-item {
-    .movie-row {
-        margin-bottom: 20px;
-    }
+    padding-top: 35;
     img {
         display: block;
         margin: 0 auto;
         vertical-align: baseline;
     }
     p {
+        width: @picture-width + 20;
         text-align: center;
+        margin: 5 auto;
     }
+}
+
+.hover {
+    background-color: rgba(171, 171, 171, 0.2);
+    border-radius: 15px;
+}
+
+.movie-row {
+    margin: 20 auto;
+}
+
+header {
+    padding: 5 30;
 }

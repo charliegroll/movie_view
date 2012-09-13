@@ -42,9 +42,9 @@ def process_movies(dir):
         p = m.poster
 
         if p:
-            d = DisplayMovie(m,  m.poster.geturl('w154'))
+            d = DisplayMovie(m,  p.geturl('w154'),)
         else:
-            d = DisplayMovie(m, '')
+            d = DisplayMovie(m, '',)
 
         if m.id in movieids:
             continue

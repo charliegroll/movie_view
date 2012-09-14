@@ -6,7 +6,7 @@ $(document).ready(function(){
     wrapyourtool();
     $('#movie-grid *, header, footer').hide().load().delay(1000).fadeIn(800);
 
-    $('.movie-item').hover(function() {
+    $('.movie-item').hover(function() { //these get removed when filtering in search bar
         $(this).addClass('hover');
     }, function(){
         $(this).removeClass('hover');
@@ -18,13 +18,17 @@ $(document).ready(function(){
         $(this).css('background-color', '');
     });
 
+    $('.modalimage').click(function() {
+        var title = $(this).parent().find('p').text();
+        $('#moviemodal h3').text(title);
+    });
+
     $('.search-query').on('keyup', function() {
         var key = $(this).val().toLowerCase();
         $('#movie-grid').empty();
         ALL.each(function() {
             var text = $(this).find('p').text().toLowerCase();
             if (text.indexOf(key) >= 0) {
-                console.log($(this));
                 $('#movie-grid').append($(this));
             }
         });

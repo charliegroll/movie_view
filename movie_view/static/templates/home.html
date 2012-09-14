@@ -7,12 +7,22 @@
 <section id="movie-grid">
 {% for m in movies %}
 	<div id="{{ m.movie.id }}" class="movie-item span2">
-        <img src="{{ m.poster }}" />
-        <p>{{ m.movie.title }}{% if m.movie.releasedate.year %}({{ m.movie.releasedate.year }}){% endif %}</p>
+        <a class="modalimage" href="#moviemodal" role="button" data-toggle="modal"><img src="{{ m.poster }}" /></a>
+        <p>{{ m.movie.title }} {% if m.movie.releasedate.year %}({{ m.movie.releasedate.year }}){% endif %}</p>
         <script>imdbids['{{ m.movie.id }}'] = '{{ m.movie.imdb }}';</script>
     </div>
 {% endfor %}
 </div>
 </section>
+
+<div id="moviemodal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3></h3>
+    </div>
+    <div class="modal-body">
+        <p>One fine body…</p>
+    </div>
+</div>
 
 {% endblock %}

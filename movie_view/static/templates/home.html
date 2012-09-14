@@ -5,21 +5,12 @@
 
 {% block content %}
 <section id="movie-grid">
-<div class="movie-row row-fluid">
 {% for m in movies %}
-	<div class="movie-item span2">
+	<div id="{{ m.movie.id }}" class="movie-item span2">
         <img src="{{ m.poster }}" />
-        <p>{{ m.movie.title }} 
-        {% if m.movie.releasedate.year %}
-        ({{ m.movie.releasedate.year }})
-        {% endif %}
-        </p>
+        <p>{{ m.movie.title }}{% if m.movie.releasedate.year %}({{ m.movie.releasedate.year }}){% endif %}</p>
         <script>imdbids['{{ m.movie.id }}'] = '{{ m.movie.imdb }}';</script>
     </div>
-    {% if forloop.counter|divisibleby:6 %}
-    </div>
-    <div class="movie-row row-fluid">
-    {% endif %}
 {% endfor %}
 </div>
 </section>

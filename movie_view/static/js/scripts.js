@@ -3,10 +3,11 @@ var ALL;
 
 $(document).ready(function(){
     ALL = $('.movie-item');
-    wrapyourtool();
-    $('#movie-grid *, header, footer').hide().load().delay(1000).fadeIn(800);
 
+    wrapyourtool();
     hovers();
+
+    $('#movie-grid *, header, footer').hide().load().delay(1000).fadeIn(800);
 
     $('.movie-item').mousedown(function() {
         $(this).css('background-color', 'rgba(171, 171, 171, 0.1)');

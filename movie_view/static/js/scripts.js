@@ -6,11 +6,7 @@ $(document).ready(function(){
     wrapyourtool();
     $('#movie-grid *, header, footer').hide().load().delay(1000).fadeIn(800);
 
-    $('.movie-item').hover(function() { //these get removed when filtering in search bar
-        $(this).addClass('hover');
-    }, function(){
-        $(this).removeClass('hover');
-    });
+    hovers();
 
     $('.movie-item').mousedown(function() {
         $(this).css('background-color', 'rgba(171, 171, 171, 0.1)');
@@ -33,6 +29,7 @@ $(document).ready(function(){
             }
         });
         wrapyourtool();
+        hovers();
     });
 });
 
@@ -42,4 +39,12 @@ function wrapyourtool() {
         $(this).prevAll('.movie-item').andSelf().wrapAll(wrapper);
     });
     $('#movie-grid>.movie-item').wrapAll(wrapper);
+}
+
+function hovers() {
+    $('.movie-item').hover(function() { //these get removed when filtering in search bar
+        $(this).addClass('hover');
+    }, function(){
+        $(this).removeClass('hover');
+    });
 }

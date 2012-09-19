@@ -5,7 +5,7 @@ $(document).ready(function(){
     ALL = $('.movie-item');
 
     wrapyourtool();
-    hovers();
+    bindings();
 
     $('#movie-grid *, header, footer').hide().load().delay(1000).fadeIn(800);
 
@@ -13,11 +13,6 @@ $(document).ready(function(){
         $(this).css('background-color', 'rgba(171, 171, 171, 0.1)');
     }).mouseup(function() {
         $(this).css('background-color', '');
-    });
-
-    $('.modalimage').click(function() {
-        var title = $(this).parent().find('p').text();
-        $('#moviemodal h3').text(title);
     });
 
     $('.search-query').on('keyup', function() {
@@ -30,7 +25,7 @@ $(document).ready(function(){
             }
         });
         wrapyourtool();
-        hovers();
+        bindings();
     });
 });
 
@@ -42,10 +37,15 @@ function wrapyourtool() {
     $('#movie-grid>.movie-item').wrapAll(wrapper);
 }
 
-function hovers() {
+function bindings() {
     $('.movie-item').hover(function() { //these get removed when filtering in search bar
         $(this).addClass('hover');
     }, function(){
         $(this).removeClass('hover');
+    });
+
+    $('.modalimage').click(function() {
+        var title = $(this).parent().find('p').text();
+        $('#moviemodal h3').text(title);
     });
 }

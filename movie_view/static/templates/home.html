@@ -8,8 +8,12 @@
 {% for m in movies %}
 	<div id="{{ m.movie.id }}" class="movie-item span2">
         <a class="modalimage" href="#moviemodal" role="button" data-toggle="modal"><img src="{{ m.poster }}" /></a>
-        <p>{{ m.movie.title }} {% if m.movie.releasedate.year %}({{ m.movie.releasedate.year }}){% endif %}</p>
-        <script>imdbids['{{ m.movie.id }}'] = '{{ m.movie.imdb }}';</script>
+        <p>{{ m.title }} {% if m.movie.releasedate.year %}({{ m.movie.releasedate.year }}){% endif %}</p>
+        <script>
+            imdbids['{{ m.id }}'] = '{{ m.movie.imdb }}';
+            appletrailers['{{ m.id }}'] = '{{ m.apple_trailer }}'; 
+            youtubetrailers['{{ m.id }}'] = '{{ m.youtube_trailer }}';
+        </script>
     </div>
 {% endfor %}
 </div>
@@ -21,7 +25,9 @@
         <h3></h3>
     </div>
     <div class="modal-body">
-        <p>One fine body…</p>
+        <video class="modal-trailer" autoplay="autoplay" autobuffer="autobuffer"></video>
+        <ul class="inline">
+        </ul>
     </div>
 </div>
 

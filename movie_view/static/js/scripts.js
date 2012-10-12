@@ -1,4 +1,6 @@
 var imdbids = [];
+var appletrailers = [];
+var youtubetrailers = [];
 var ALL;
 
 $(document).ready(function(){
@@ -45,7 +47,15 @@ function bindings() {
     });
 
     $('.modalimage').click(function() {
+        var movieid = $(this).parent().attr('id');
         var title = $(this).parent().find('p').text();
         $('#moviemodal h3').text(title);
+        
+        var appletrailersrc = '<source src="'+ appletrailers[movieid] +'">';
+        var youtubetrailersrc = '<source src="'+ youtubetrailers[movieid] +'">';
+        $('.modal-trailer').empty().append('<source src="');
+
+        var imdblink = 'http://www.imdb.com/title/' + imdbids[movieid];
+        $('.modal-body>ul').empty().append('<li><a href="'+ imdblink +'" target="_blank">IMDb</a></li>');
     });
 }

@@ -92,6 +92,8 @@ class DisplayMovie:
         self.movie = movie
         self.title = movie.title
         self.poster = poster
+        self.apple_trailer = movie.apple_trailer.geturl()
+        self.youtube_trailer = movie.youtube_trailer.geturl()
         self.year = (movie.releasedate.year if movie.releasedate else 0)
     def __str__(self):
         return repr(self.movie.title + ' (' + str(self.year) + ')')

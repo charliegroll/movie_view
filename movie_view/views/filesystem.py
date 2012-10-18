@@ -32,8 +32,8 @@ def explore(dir):
 
             froot = f[:f.rfind(".")]
             y = froot[froot.rfind("(")+1:froot.rfind(")")] # have to check if there's no year
-            t = froot[:froot.rfind("(")].strip().replace("_", ":") # some filesystems replace ':' with '_'
-            f = f.replace("_", ":")
+            t = froot[:froot.rfind("(")].strip().replace("_", ":").replace("\\", "/") # some filesystems replace ':' with '_'
+            f = f.replace("_", ":").replace("\\", "/")
             d = root
 
             m = MovieFile(title=t, year=y, dir=d, filename=f)

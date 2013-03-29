@@ -1,7 +1,5 @@
-var imdbids = [];
-var appletrailers = [];
-var youtubetrailers = [];
-var ALL;
+var movies = {},
+    ALL;
 
 $(document).ready(function(){
     ALL = $('.movie-item');
@@ -43,19 +41,21 @@ function bindings() {
     $('.movie-item').hover(function() { //these get removed when filtering in search bar
         $(this).addClass('hover');
     }, function(){
-        $(this).removeClass('hover');
+        $('.hover').css('background-color', '').removeClass('hover');
     });
 
     $('.modalimage').click(function() {
-        var movieid = $(this).parent().attr('id');
-        var title = $(this).parent().find('p').text();
-        $('#moviemodal h3').text(title);
+        var movieid = $(this).parent().attr('id'),
+            title = $(this).parent().find('p').text(),
+            tag = movies[movieid].tag,
+            imdblink = 'http://www.imdb.com/title/' + movies[movieid].imdb;
         
-        var appletrailersrc = '<source src="'+ appletrailers[movieid] +'">';
-        var youtubetrailersrc = '<source src="'+ youtubetrailers[movieid] +'">';
+        $('.modal-header h3').text(title);
+        $('#modal-tag').text(tag);
+        
+        var appletrailersrc = '<source src="'+ movies[movieid].appletrailer +'">';
+        var youtubetrailersrc = '<source src="'+ movies[movieid].youtubetrailer +'">';
         $('.modal-trailer').empty().append('<source src="');
-
-        var imdblink = 'http://www.imdb.com/title/' + imdbids[movieid];
         $('.modal-body>ul').empty().append('<li><a href="'+ imdblink +'" target="_blank">IMDb</a></li>');
     });
 }

@@ -10,9 +10,13 @@
         <a class="modalimage" href="#moviemodal" role="button" data-toggle="modal"><img src="{{ m.poster }}" /></a>
         <p>{{ m.title }} {% if m.movie.releasedate.year %}({{ m.movie.releasedate.year }}){% endif %}</p>
         <script>
-            imdbids['{{ m.id }}'] = '{{ m.movie.imdb }}';
-            appletrailers['{{ m.id }}'] = '{{ m.apple_trailer }}'; 
-            youtubetrailers['{{ m.id }}'] = '{{ m.youtube_trailer }}';
+            movies['{{ m.movie.id }}'] = 
+                { 
+                    imdb: '{{ m.movie.imdb }}',
+                    tag: '{{ m.movie.tagline }}',
+                    appletrailer: '{{ m.apple_trailer }}',
+                    youtubetrailer: '{{ m.youtube_trailer }}'
+                }
         </script>
     </div>
 {% endfor %}
@@ -25,6 +29,7 @@
         <h3></h3>
     </div>
     <div class="modal-body">
+        <p id="modal-tag"></p>
         <video class="modal-trailer" autoplay="autoplay" autobuffer="autobuffer"></video>
         <ul class="inline">
         </ul>

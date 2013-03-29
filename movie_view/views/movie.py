@@ -58,7 +58,7 @@ def process_movies(dir):
             print "Couldn't find results for: " + f.fulltitle + " result = " + str(result)
             continue
 
-        print "**** Found results for: " + f.fulltitle + " result = " + str(result[0])
+        # print "**** Found results for: " + f.fulltitle + " result = " + str(result[0])
 
         movie = result[0] if len(result) > 0 else None
         movies.append(movie)
@@ -102,23 +102,29 @@ def loadfromfile(dir):
 
         return mtds
     except:
-        file = open(dir + datafile, 'w')
-        file.write('')
-        file.close()
-        return None
+        try:
+            file = open(dir + datafile, 'w')
+            file.write('')
+            file.close()
+            return None
+        except:
+            raise Http404
 
 def writetofile(dir, mtd):
-    f = open(dir + datafile, 'w')
-    pickle.dump(mtd, f, -1)
-    f.close()
+    try:
+        f = open(dir + datafile, 'w')
+        pickle.dump(mtd, f, -1)
+        f.close()
+    except:
+        raise Http404
 
 class DisplayMovie:
     def __init__(self, movie, poster):
         self.movie = movie
         self.title = movie.title
         self.poster = poster
-        #self.apple_trailer = movie.apple_trailer.geturl()
-        #self.youtube_trailer = movie.youtube_trailer.geturl()
+        # self.apple_trailer = movie.apple_trailer.geturl()
+        # self.youtube_trailer = movie.youtube_trailer.geturl()
         self.year = (movie.releasedate.year if movie.releasedate else 0)
     def __str__(self):
         return repr(self.movie.title + ' (' + str(self.year) + ')')

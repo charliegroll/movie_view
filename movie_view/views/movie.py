@@ -17,6 +17,7 @@ from filesystem import explore, fileset, MovieFile
 
 movieids = list()
 moviesToDisplay = list()
+notfound = list()
 
 datafile = '/.movie.info'
 
@@ -25,7 +26,7 @@ def showall(request):
 
     # get movie list
     movies = process_movies('/Volumes/My Book/Movies')
-    html = t.render(Context({'movies': movies,}))
+    html = t.render(Context({'movies': movies,'notfound': notfound,}))
 
     return HttpResponse(html)
 
@@ -55,6 +56,8 @@ def process_movies(dir):
         result = searchMovie(f.fulltitle)
 
         if len(result) == 0:
+            if f.filename not in notfound:
+                notfound.append(f.filename)
             print "Couldn't find results for: " + f.fulltitle + " result = " + str(result)
             continue
 

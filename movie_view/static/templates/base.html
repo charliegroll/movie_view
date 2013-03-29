@@ -18,6 +18,14 @@
         <div class="navbar">
             <a class="brand" href="#">{% block headtitle %}{% endblock %}</a>
             <div class="navbar-search pull-right">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">{{ notfound|length }}</button>
+                <ul class="dropdown-menu">
+                    <li><strong>Not Found</strong></li>
+                    <li class="divider"></li>
+                    {% for nf in notfound %}
+                        <li><span>{{ nf }}</span></li>
+                    {% endfor %}
+                </ul>
                 <input type="text" class="search-query" placeholder="Search">
             </div>
         </div>

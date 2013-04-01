@@ -56,6 +56,10 @@ function bindings() {
         var appletrailersrc = '<source src="'+ movies[movieid].appletrailer +'">';
         var youtubetrailersrc = '<source src="'+ movies[movieid].youtubetrailer +'">';
         $('.modal-trailer').empty().append('<source src="');
-        $('.modal-body>ul').empty().append('<li><a href="'+ imdblink +'" target="_blank">IMDb</a></li>');
+
+        $('#imdblink').attr('href', imdblink);
+        console.log(movies[movieid].filename)
+        var beamerlink = '/beam/' + title.replace(/ /g, '~');
+        $('#beamer').attr('href', beamerlink);
     });
 }

@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from movie_view.views import movie
+from movie_view.views import movie, beamer
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -8,6 +8,7 @@ from movie_view.views import movie
 urlpatterns = patterns('',
         (r'^movies/$', movie.showall),
         (r'^$', movie.showall),
+        (r'^beam/(?P<moviefile>.+)$', beamer.beam),
     # Examples:
     # url(r'^$', 'movie_view.views.home', name='home'),
     # url(r'^movie_view/', include('movie_view.foo.urls')),

@@ -19,19 +19,19 @@ movieids = list()
 moviesToDisplay = list()
 notfound = list()
 
-datafile = '/.movie.info'
+datafile = DEFAULT_DATA_FILE
 
 def showall(request):
     t = get_template('home.html')
 
     # get movie list
-    movies = process_movies('/Volumes/My Book/Movies')
+    movies = process_movies(DEFAULT_MOVIE_DIR)
     html = t.render(Context({'movies': movies,'notfound': notfound,}))
 
     return HttpResponse(html)
 
 def process_movies(dir):
-    set_key('36fb5f623484f4b2680f492005762f31') #store this key somewhere
+    set_key(API_KEY) #store this key somewhere
     set_locale()
 
     dir = expand(dir)

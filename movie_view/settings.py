@@ -1,6 +1,7 @@
 # Django settings for movie_view project.
 import os.path
 import logging
+from movie_view import secret_settings
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -79,9 +80,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '3jxtnwt*gqc8y=v8o#7tih6)n^8zxfkk*f(t!+dxzphpa(q3^a'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

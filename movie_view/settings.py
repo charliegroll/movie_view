@@ -158,3 +158,5 @@ logging.basicConfig(
     level = logging.DEBUG,
     format = '%(asctime)s %(levelname)s %(message)s',
 )
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))

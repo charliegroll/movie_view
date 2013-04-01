@@ -1,6 +1,7 @@
 from tmdb3 import set_key, set_locale, searchMovie, Movie
 from django.http import HttpResponse, Http404
-from movie_view.secret_settings import API_KEY, DEFAULT_MOVIE_DIR, DEFAULT_DATA
+from movie_view.secret_settings import API_KEY, DEFAULT_MOVIE_DIR, DEFAULT_DATA_FILE
+from movie_view.settings import PROJECT_ROOT
 from django import template
 from django.template import Context
 from django.template.loader import get_template
@@ -23,7 +24,7 @@ notfound = list()
 
 datafile = DEFAULT_DATA_FILE 
 
-DEFAULT_MOVIE_DIR = DEFAULT_MOVIE_DIR if exists(DEFAULT_MOVIE_DIR) else PROJECT_ROOT + 'demo'
+DEFAULT_MOVIE_DIR = DEFAULT_MOVIE_DIR if exists(DEFAULT_MOVIE_DIR) else PROJECT_ROOT + '/demo'
 
 def showall(request):
     t = get_template('home.html')
@@ -99,7 +100,9 @@ def loadfromfile(dir):
     f = None
     try:
         f = open(dir + datafile, 'r')
+        print 103
         mtds = pickle.load(f)
+        print mtds
 
         for mtd in mtds:
             pos = bisect.bisect(movieids, mtd.movie.id)
@@ -115,6 +118,7 @@ def loadfromfile(dir):
             file.close()
             return None
         except:
+            print 'Error during movie.loadfromfile'
             raise Http404
 
 def writetofile(dir, mtd):
@@ -123,6 +127,7 @@ def writetofile(dir, mtd):
         pickle.dump(mtd, f, -1)
         f.close()
     except:
+        print 'Error during movie.writetofile'
         raise Http404
 
 class DisplayMovie:

@@ -3,7 +3,7 @@ import os.path
 import logging
 from movie_view import secret_settings
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -14,8 +14,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase'
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'mydatabase',                      # Or path to database file if using sqlite3.
     }
 }
 
@@ -85,11 +85,11 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    #'django.middleware.common.CommonMiddleware',
-    #'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -108,11 +108,11 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    #'django.contrib.auth',
-    #'django.contrib.contenttypes',
-    #'django.contrib.sessions',
-    #'django.contrib.sites',
-    #'django.contrib.messages',
+    # 'django.contrib.auth',
+    'django.contrib.contenttypes',
+    # 'django.contrib.sessions',
+    # 'django.contrib.sites',
+    # 'django.contrib.messages',
     'django.contrib.staticfiles',
     'movie_view',
     # Uncomment the next line to enable the admin:
@@ -129,17 +129,12 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
- #   'filters': {
- #       'require_debug_false': {
- #           '()': 'django.utils.log.RequireDebugFalse'
- #       }
- #   },
+    'filters': {
+        # 'require_debug_false': {
+        #     '()': 'django.utils.log.RequireDebugFalse'
+        # }
+    },
     'handlers': {
- #      'mail_admins': {
- #          'level': 'ERROR',
- #           'filters': ['require_debug_false'],
- #          'class': 'django.utils.log.AdminEmailHandler'
- #      }
     },
     'loggers': {
         # 'django.request': {

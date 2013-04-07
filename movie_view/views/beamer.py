@@ -3,7 +3,7 @@ import os
 from movie_view.secret_settings import DEFAULT_MOVIE_DIR
 from django.http import HttpResponse, Http404
 
-DEFAULT_MOVIE_DIR = DEFAULT_MOVIE_DIR if exists(DEFAULT_MOVIE_DIR) else PROJECT_ROOT + 'demo'
+DEFAULT_MOVIE_DIR = DEFAULT_MOVIE_DIR if os.path.exists(DEFAULT_MOVIE_DIR) else PROJECT_ROOT + 'demo'
 
 def beam(request, moviefile):
 	moviefile = moviefile.replace('~', ' ')

@@ -53,12 +53,12 @@ function bindings() {
         $('.modal-header h3').text(title);
         $('#modal-tag').text(tag);
         
-        var appletrailersrc = '<source src="'+ movies[movieid].appletrailer +'">';
-        var youtubetrailersrc = '<source src="'+ movies[movieid].youtubetrailer +'">';
-        $('.modal-trailer').empty().append('<source src="');
+        //var appletrailersrc = '<source src="'+ movies[movieid].appletrailer +'">';
+        //var youtubetrailersrc = '<source src="'+ movies[movieid].youtubetrailer +'">';
+        //$('.modal-trailer').empty().append('<source src="');
 
         $('#imdblink').attr('href', imdblink);
-        console.log(movies[movieid].filename)
+
         var beamerlink = '/beam/' + title.replace(/ /g, '~');
         $('#beamer').click(function () {
             $.ajax(beamerlink);

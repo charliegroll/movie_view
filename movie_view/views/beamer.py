@@ -7,7 +7,7 @@ from django.http import HttpResponse, Http404
 DEFAULT_MOVIE_DIR = DEFAULT_MOVIE_DIR if os.path.exists(DEFAULT_MOVIE_DIR) else PROJECT_ROOT + 'demo'
 
 def beam(request, moviefile):
-	moviefile = moviefile.replace('~', ' ')
+	moviefile = moviefile.replace('~', ' ').replace(':', '_')
 
 	beamer_cmdflag = ''
 	if BEAMER_FLAG:
@@ -35,6 +35,7 @@ def beam(request, moviefile):
 					traceback.print_exc(file=sys.stdout)
 					raise Http404
 			else:
+				print 'not found'
 				raise Http404
 	else:
 		raise Http404

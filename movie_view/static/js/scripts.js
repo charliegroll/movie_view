@@ -60,6 +60,8 @@ function bindings() {
         $('#imdblink').attr('href', imdblink);
         console.log(movies[movieid].filename)
         var beamerlink = '/beam/' + title.replace(/ /g, '~');
-        $('#beamer').attr('href', beamerlink);
+        $('#beamer').click(function () {
+            $.ajax(beamerlink);
+        });
     });
 }

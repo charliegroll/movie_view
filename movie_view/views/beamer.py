@@ -1,10 +1,10 @@
 import subprocess
 import os, traceback, sys
-from movie_view.settings import BEAMER_FLAG
+from movie_view.settings import BEAMER_FLAG, PROJECT_ROOT
 from movie_view.secret_settings import DEFAULT_MOVIE_DIR
 from django.http import HttpResponse, Http404
 
-DEFAULT_MOVIE_DIR = DEFAULT_MOVIE_DIR if os.path.exists(DEFAULT_MOVIE_DIR) else PROJECT_ROOT + 'demo'
+DEFAULT_MOVIE_DIR = DEFAULT_MOVIE_DIR if os.path.exists(DEFAULT_MOVIE_DIR) else PROJECT_ROOT + '/demo'
 
 def beam(request, moviefile):
 	moviefile = moviefile.replace('~', ' ').replace(':', '_')
@@ -13,6 +13,8 @@ def beam(request, moviefile):
 	if BEAMER_FLAG:
 		beamer_cmdflag = '-a \'Beamer\''
 	
+	print DEFAULT_MOVIE_DIR
+
 	if request.method == 'GET':
 		for root, dirs, files in os.walk(DEFAULT_MOVIE_DIR):
 			found = False
@@ -38,6 +40,7 @@ def beam(request, moviefile):
 				print 'not found'
 				raise Http404
 	else:
+		print 'Not a GET'
 		raise Http404
 
 	raise Http404

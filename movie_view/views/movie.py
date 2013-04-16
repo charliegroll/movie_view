@@ -1,7 +1,7 @@
 from tmdb3 import set_key, set_locale, searchMovie, Movie
 from django.http import HttpResponse, Http404
-from movie_view.secret_settings import API_KEY, DEFAULT_MOVIE_DIR, DEFAULT_DATA_FILE
 from movie_view.settings import PROJECT_ROOT
+from movie_view.secret_settings import API_KEY, DEFAULT_MOVIE_DIR, DEFAULT_DATA_FILE
 from django import template
 from django.template import Context
 from django.template.loader import get_template

@@ -10,6 +10,8 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+BEAMER_FLAG = True
+
 MANAGERS = ADMINS
 
 DATABASES = {

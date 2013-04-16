@@ -24,6 +24,8 @@
                     <li class="divider"></li>
                     {% for nf in notfound %}
                         <li><span>{{ nf }}</span></li>
+                    {% empty %}
+                        <li><span>Found 'em all!</span></li>
                     {% endfor %}
                 </ul>
                 <input type="text" class="search-query" placeholder="Search">
